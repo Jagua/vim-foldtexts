@@ -1,0 +1,42 @@
+# vim-foldtexts
+
+**vim-foldtexts** is a Vim plugin. This plugin provides some functions to get list of text displayed for a closed fold in a current buffer.
+
+
+
+## Usage
+
+
+* Create a location list and open the window
+	```vim
+	command! -nargs=0 LocFoldtexts lgetexpr foldtexts#get_qfexpr() | lopen
+	```
+* Create a quickfix list and open the window
+	```vim
+	command! -nargs=0 QfFoldtexts cgetexpr foldtexts#get_qfexpr() | copen
+	```
+
+### using external plugins
+
+* Using CtrlP
+	```vim
+	:CtrlPFoldtexts
+	```
+* Using Denite
+	```vim
+	:Denite foldtexts
+	```
+* Using Unite
+	```vim
+	:Unite foldtexts
+	```
+	```vim
+	:Unite foldtexts/async
+	```
+* Using vim-fz
+	```vim
+	command! -nargs=0 FzFoldtexts call fz#run({'type': 'list', 'actions' : [],
+	        \ 'list': foldtexts#get_words(),
+	        \ 'accept': {res -> execute('execute foldtexts#find_lnum(res.items[0])')},
+	        \ })
+	```
