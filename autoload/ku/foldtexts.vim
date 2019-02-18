@@ -10,7 +10,7 @@ endfunction
 function! ku#foldtexts#on_source_enter(source_name_ext) abort
   let bufnr = bufwinnr(bufnr('%'))
   noautocmd wincmd p
-  let s:items = foldtexts#get_foldtexts()
+  let s:items = foldtexts#get()
   noautocmd execute bufnr . 'wincmd w'
 endfunction
 

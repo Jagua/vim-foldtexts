@@ -32,7 +32,7 @@ let s:id = g:ctrlp_builtins + len(g:ctrlp_ext_vars)
 function! ctrlp#foldtexts#init(crbufnr) abort
   let bufnr = bufwinnr(bufnr('%'))
   noautocmd execute bufwinnr(a:crbufnr) . 'wincmd w'
-  let s:items = foldtexts#get_words()
+  let s:items = foldtexts#words()
   noautocmd execute bufnr . 'wincmd w'
   return s:items
 endfunction
@@ -40,7 +40,7 @@ endfunction
 
 function! ctrlp#foldtexts#accept(mode, str) abort
   call ctrlp#exit()
-  execute foldtexts#get_lnum_from_word(a:str)
+  execute foldtexts#lnum_of_word(a:str)
 endfunction
 
 

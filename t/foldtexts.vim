@@ -11,7 +11,7 @@ describe 'vim-foldtexts'
   end
 end
 
-describe 'foldtexts#get_foldtexts()'
+describe 'foldtexts#get()'
   before
     new
     put = [
@@ -41,12 +41,12 @@ describe 'foldtexts#get_foldtexts()'
 
   it 'returns an empty list when all foldings are open'
     normal! zR
-    let items = foldtexts#get_foldtexts()
+    let items = foldtexts#get()
     Expect len(items) == 0
   end
 
   it 'returns list of dictionary which has three keys when foldings exist'
-    let items = foldtexts#get_foldtexts()
+    let items = foldtexts#get()
     Expect empty(items) to_be_false
     Expect type(items) == v:t_list
     Expect len(items) > 0
@@ -57,7 +57,7 @@ describe 'foldtexts#get_foldtexts()'
   end
 
   it 'returns proper result when foldings exist'
-    let items = foldtexts#get_foldtexts()
+    let items = foldtexts#get()
     Expect len(items) == 2
     Expect items[0].lnum == 2
     Expect items[0].foldtextresult ==# foldtextresult(items[0].lnum)
@@ -68,7 +68,7 @@ describe 'foldtexts#get_foldtexts()'
   end
 
   it 'returns proper result when taking arguments'
-    let items = foldtexts#get_foldtexts(1, 5)
+    let items = foldtexts#get(1, 5)
     Expect len(items) == 1
     Expect items[0].lnum == 2
     Expect items[0].foldtextresult ==# '+--  3 lines: function s:greeting() "'
@@ -76,7 +76,7 @@ describe 'foldtexts#get_foldtexts()'
 
   it 'returns proper result when foldings nested'
     normal! 7Gzo
-    let items = foldtexts#get_foldtexts()
+    let items = foldtexts#get()
     Expect len(items) == 2
     Expect items[1].lnum == 9
     Expect items[1].foldtextresult ==# '+---  3 lines: "'

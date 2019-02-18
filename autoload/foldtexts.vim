@@ -2,7 +2,7 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 
-function! foldtexts#get_foldtexts(...) abort
+function! foldtexts#get(...) abort
   let start = get(a:, '1', 1)
   let end = get(a:, '2', line('$'))
   return s:get_foldtexts(start, end)
@@ -10,24 +10,24 @@ endfunction
 
 
 " Note: return text adapted to format for |location-list| and |quickfix|
-function! foldtexts#get_qfexpr() abort
-  return map(foldtexts#get_foldtexts(),
+function! foldtexts#qfexpr() abort
+  return map(foldtexts#get(),
         \ 'printf("%s:%d: %s", expand("%"), v:val.lnum, v:val.foldtextresult)')
 endfunction
 
 
-function! foldtexts#get_words() abort
-  return map(foldtexts#get_foldtexts(), 'v:val.word')
+function! foldtexts#words() abort
+  return map(foldtexts#get(), 'v:val.word')
 endfunction
 
 
-function! foldtexts#get_lnum_from_word(word) abort
+function! foldtexts#lnum_of_word(word) abort
   return str2nr(matchstr(a:word, '^\s*\zs\d\+\ze\s*:'))
 endfunction
 
 
 function! foldtexts#find_lnum(foldtext) abort
-  let res = filter(foldtexts#get_foldtexts(), 'v:val.word ==# a:foldtext')
+  let res = filter(foldtexts#get(), 'v:val.word ==# a:foldtext')
   return empty(res) ? 0 : res[0].lnum
 endfunction
 

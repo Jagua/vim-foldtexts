@@ -9,11 +9,11 @@
 
 * Create a location list and open the window
 	```vim
-	command! -nargs=0 LocFoldtexts lgetexpr foldtexts#get_qfexpr() | lopen
+	command! -nargs=0 LocFoldtexts lgetexpr foldtexts#qfexpr() | lopen
 	```
 * Create a quickfix list and open the window
 	```vim
-	command! -nargs=0 QfFoldtexts cgetexpr foldtexts#get_qfexpr() | copen
+	command! -nargs=0 QfFoldtexts cgetexpr foldtexts#qfexpr() | copen
 	```
 
 ### using external plugins
@@ -36,7 +36,7 @@
 * Using vim-fz
 	```vim
 	command! -nargs=0 FzFoldtexts call fz#run({'type': 'list', 'actions' : [],
-	        \ 'list': foldtexts#get_words(),
+	        \ 'list': foldtexts#words(),
 	        \ 'accept': {res -> execute('execute foldtexts#find_lnum(res.items[0])')},
 	        \ })
 	```

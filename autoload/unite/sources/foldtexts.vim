@@ -16,7 +16,7 @@ let s:source = {
 
 
 function! s:source.hooks.on_init(args, context) abort
-  let a:context._items = foldtexts#get_foldtexts()
+  let a:context._items = foldtexts#get()
 endfunction
 
 
@@ -56,7 +56,7 @@ function! s:source_async.async_gather_candidates(args, context) abort
   else
     noautocmd execute bufwinnr(a:context._bufnr) . 'wincmd w'
     let a:context._lnum = lnum + a:context._lnum_step
-    let items = foldtexts#get_foldtexts(lnum, a:context._lnum)
+    let items = foldtexts#get(lnum, a:context._lnum)
     noautocmd execute bufwinnr(bufnr) . 'wincmd w'
     return items
   endif

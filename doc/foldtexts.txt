@@ -1,6 +1,6 @@
 *foldtexts.txt*  foldtexts
 
-Version: 0.1.1
+Version: 0.1.2
 Author: Jagua
 License: MIT License
 
@@ -39,13 +39,13 @@ COMMANDS                                                  *foldtexts-commands*
 ------------------------------------------------------------------------------
 FUNCTIONS                                                *foldtexts-functions*
 
-foldtexts#get_foldtexts()                          *foldtexts#get_foldtexts()*
+foldtexts#get()                                              *foldtexts#get()*
                 get list of dictionary about text displayed for a closed fold.
                 Each dictionary has three keys; "foldtextresult", "lnum" and
                 "word".
 
 
-foldtexts#get_qfexpr()                                *foldtexts#get_qfexpr()*
+foldtexts#qfexpr()                                        *foldtexts#qfexpr()*
                 get list of string formatted for |quickfix| or |location-list|
                 see |foldtexts-examples|.
 
@@ -59,7 +59,7 @@ EXAMPLES                                                  *foldtexts-examples*
 
 >
         " setglobal fillchars-=fold:-
-        lgetexpr foldtexts#get_qfexpr() | lopen
+        lgetexpr foldtexts#qfexpr() | lopen
 <
 
 
@@ -67,6 +67,13 @@ EXAMPLES                                                  *foldtexts-examples*
 
 ==============================================================================
 CHANGELOG                                                *foldtexts-changelog*
+
+0.1.2   2019-02-18
+        - Change API names.
+          - from foldtexts#get_foldtexts() to foldtexts#get()
+          - from foldtexts#get_qfexpr() to foldtexts#qfexpr()
+          - from foldtexts#get_words() to foldtexts#words()
+          - from foldtexts#get_lnum_from_word() to foldtexts#lnum_of_word()
 
 0.1.1   2018-07-05
         - Upload to GitHub.
