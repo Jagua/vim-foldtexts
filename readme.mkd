@@ -1,5 +1,7 @@
 # vim-foldtexts
 
+[![Build Status](https://travis-ci.org/Jagua/vim-foldtexts.svg?branch=master)](https://travis-ci.org/Jagua/vim-foldtexts)
+
 **vim-foldtexts** is a Vim plugin. This plugin provides some functions to get list of text displayed for a closed fold in a current buffer.
 
 
