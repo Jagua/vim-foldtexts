@@ -1,4 +1,11 @@
 language: ruby
 rvm:
   - 2.6.3
+before_install:
+  - git clone --depth 1 --branch master --single-branch https://github.com/vim/vim.git /tmp/vim
+  - cd /tmp/vim
+  - ./configure --with-features=huge --enable-fail-if-missing --prefix="${HOME}/local"
+  - make -j3 && make install
+  - export PATH="${HOME}/local/bin":$PATH
+  - cd "${TRAVIS_BUILD_DIR}"
 script: rake ci
