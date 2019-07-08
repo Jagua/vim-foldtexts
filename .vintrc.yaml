@@ -1,3 +1,5 @@
 policies:
+  ProhibitImplicitScopeVariable:
+    enabled: no
   ProhibitUnnecessaryDoubleQuote:
     enabled: no

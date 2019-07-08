@@ -1,11 +1,42 @@
+---
 language: ruby
+
 rvm:
   - 2.6.3
+
+addons:
+  apt:
+    packages:
+      - python3-dev
+      - python3-pip
+
+env:
+  global:
+    - PROFILE_LOG="${TRAVIS_BUILD_DIR}/build/profile.txt"
+
 before_install:
+  - pip3 install --upgrade pip
+  - pip3 install --user vim-vint
+  - pip3 install --user covimerage
+  - go get github.com/haya14busa/go-vimlparser/cmd/vimlparser
   - git clone --depth 1 --branch master --single-branch https://github.com/vim/vim.git /tmp/vim
   - cd /tmp/vim
   - ./configure --with-features=huge --enable-fail-if-missing --prefix="${HOME}/local"
   - make -j3 && make install
-  - export PATH="${HOME}/local/bin":$PATH
+  - export PATH="${HOME}/local/bin:${PATH}"
   - cd "${TRAVIS_BUILD_DIR}"
-script: rake ci
+
+before_script:
+  - shopt -s globstar
+  - mkdir -p build
+  - rm -f ./build/caverage.xml "${PROFILE_LOG}" ./build/.coverage.covimerage
+
+script:
+  - rake ci
+
+after_success:
+  - vint autoload plugin
+  - vimlparser plugin/**/*.vim autoload/**/*.vim > /dev/null
+  - covimerage write_coverage "${PROFILE_LOG}" --data-file ./build/.coverage.covimerage
+  - coverage xml -o ./build/caverage.xml
+  - coverage report
