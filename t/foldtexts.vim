@@ -1,3 +1,13 @@
+if !empty($PROFILE_LOG)
+  profile start $PROFILE_LOG
+  profile! file autoload/*.vim
+  profile! file plugin/*.vim
+  " runtime! autoload/ctrlp/*.vim
+  " runtime! autoload/ku/*.vim
+  " runtime! autoload/unite/*/*.vim
+endif
+
+
 runtime! plugin/foldtexts.vim
 
 
