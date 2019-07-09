@@ -16,8 +16,7 @@ env:
 
 before_install:
   - pip3 install --upgrade pip
-  - pip3 install --user vim-vint
-  - pip3 install --user covimerage
+  - pip3 install --user vim-vint covimerage
   - go get github.com/haya14busa/go-vimlparser/cmd/vimlparser
   - git clone --depth 1 --branch master --single-branch https://github.com/vim/vim.git /tmp/vim
   - cd /tmp/vim
@@ -29,7 +28,6 @@ before_install:
 before_script:
   - shopt -s globstar
   - mkdir -p build
-  - rm -f ./build/coverage.xml "${PROFILE_LOG}" ./build/.coverage.covimerage
 
 script:
   - rake ci
@@ -38,5 +36,6 @@ after_success:
   - vint autoload plugin
   - vimlparser plugin/**/*.vim autoload/**/*.vim > /dev/null
   - covimerage write_coverage "${PROFILE_LOG}" --data-file ./build/.coverage.covimerage
-  - coverage xml -o ./build/coverage.xml
+  - coverage xml
   - coverage report
+  - bash <(curl -s https://codecov.io/bash)
