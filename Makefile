@@ -1,10 +1,12 @@
 .PHONY: all lint test vspec coverage
 
+SHELL := bash -O globstar
+
 all: lint test
 
 lint:
 	vint autoload plugin
-	vimlparser plugin/*.vim autoload/*.vim autoload/*/*.vim autoload/*/*/*.vim > /dev/null
+	vimlparser plugin/*.vim autoload/**/*.vim > /dev/null
 
 test:
 	rake test
