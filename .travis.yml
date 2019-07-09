@@ -29,7 +29,7 @@ before_install:
 before_script:
   - shopt -s globstar
   - mkdir -p build
-  - rm -f ./build/caverage.xml "${PROFILE_LOG}" ./build/.coverage.covimerage
+  - rm -f ./build/coverage.xml "${PROFILE_LOG}" ./build/.coverage.covimerage
 
 script:
   - rake ci
@@ -38,5 +38,5 @@ after_success:
   - vint autoload plugin
   - vimlparser plugin/**/*.vim autoload/**/*.vim > /dev/null
   - covimerage write_coverage "${PROFILE_LOG}" --data-file ./build/.coverage.covimerage
-  - coverage xml -o ./build/caverage.xml
+  - coverage xml -o ./build/coverage.xml
   - coverage report
